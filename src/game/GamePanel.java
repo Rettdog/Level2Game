@@ -21,7 +21,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	GameObject object;
 	Font titleFont;
 	Font nontitle;
-	Oreo ninjoreo = new Oreo(250,700,50,50);
+	Oreo ninjoreo = new Oreo(250,350,50,50);
+	ObjectManager manager = new ObjectManager(ninjoreo);
 	boolean jumping=false;
 
 	GamePanel() {
@@ -37,6 +38,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 ninjoreo.update();
+manager.update();
+manager.manageEnemies();
+
 	}
 
 	void updateEndState() {
@@ -61,6 +65,7 @@ ninjoreo.update();
 
 		g.fillRect(0, 0, Ninjoreo.width, Ninjoreo.height);  
 		ninjoreo.draw(g);
+		manager.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
@@ -128,7 +133,7 @@ ninjoreo.update();
 			
 		}
 		if (e.getKeyCode() == 38) {
-			jump(ninjoreo.speed, jumping);
+			
 			
 		}
 		
@@ -137,6 +142,7 @@ ninjoreo.update();
 		
 		// TODO Auto-generated method stub
 		System.out.println("pressed");
+		System.out.println(e.getKeyCode());
 		if (e.getKeyCode() == 10) {
 			// System.out.println(e.getKeyCode());
 			currentState++;
@@ -147,28 +153,34 @@ ninjoreo.update();
 
 			}
 		}
+	if(e.getKeyCode()==38) {
+		ninjoreo.jump();
+		
+	}
+
+	if(e.getKeyCode()==37) {
+		ninjoreo.xSpeed=-5;
+		
+	}
+	if(e.getKeyCode()==39) {
+		ninjoreo.xSpeed=5;
+		
+	}
 	}
 	
-	void jump(float iSpeed, boolean jumping) {
-		this.jumping=true;
-		while(ninjoreo.y<Ninjoreo.height) {
-			System.out.println(ninjoreo.y);
-			ninjoreo.y-=iSpeed;
-			iSpeed-=.1;
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		this.jumping=false;
-		}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("released");
+		if(e.getKeyCode()==37) {
+			ninjoreo.xSpeed=0;
+			
+		}
+		if(e.getKeyCode()==39) {
+			ninjoreo.xSpeed=0;
+			
+		}
 	}
 
 }
