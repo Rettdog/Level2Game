@@ -8,15 +8,17 @@ public class GameObject {
 	int y;
 	int width;
 	int height;
-	boolean isAlive=true;
+	boolean isAlive = true;
 	Rectangle collisionBox;
+	boolean lose;
 
 	GameObject(int xp, int yp, int widthp, int heightp) {
 		x = xp;
 		y = yp;
 		width = widthp;
 		height = heightp;
-		collisionBox = new Rectangle(x,y,width,height);
+		collisionBox = new Rectangle(x, y, width, height);
+		lose = false;
 	}
 
 	void update() {
@@ -25,7 +27,6 @@ public class GameObject {
 
 	void draw(Graphics g) {
 		g.fillRect(x, y, 100, 100);
-        
 
 	}
 }

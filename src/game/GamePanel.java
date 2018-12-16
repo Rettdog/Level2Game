@@ -21,9 +21,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	GameObject object;
 	Font titleFont;
 	Font nontitle;
-	Oreo ninjoreo = new Oreo(250,350,50,50);
+	Oreo ninjoreo = new Oreo(250, 350, 50, 50);
 	ObjectManager manager = new ObjectManager(ninjoreo);
-	boolean jumping=false;
+	boolean jumping = false;
 
 	GamePanel() {
 		timer = new Timer(1000 / 60, this);
@@ -33,37 +33,38 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateMenuState() {
-
+		currentState = menuState;
 	}
 
 	void updateGameState() {
-ninjoreo.update();
-manager.update();
-manager.manageEnemies();
+		currentState = gameState;
+		ninjoreo.update();
+		manager.update();
+		manager.manageEnemies();
 
 	}
 
 	void updateEndState() {
-
+		currentState = endState;
 	}
 
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.BLUE);
 
-		g.fillRect(0, 0, Ninjoreo.width, Ninjoreo.height);    
+		g.fillRect(0, 0, Ninjoreo.width, Ninjoreo.height);
 		g.setColor(Color.BLACK);
 		g.setFont(titleFont);
-		g.drawString("Ninjoreo",100,200);
+		g.drawString("Ninjoreo", 100, 200);
 		g.setFont(nontitle);
-		g.drawString("Press enter to start",120,300);
-		g.drawString("Press space for instructions",75,400);
-		
+		g.drawString("Press enter to start", 120, 300);
+		g.drawString("Press space for instructions", 75, 400);
+
 	}
 
 	void drawGameState(Graphics g) {
 		g.setColor(Color.GREEN);
 
-		g.fillRect(0, 0, Ninjoreo.width, Ninjoreo.height);  
+		g.fillRect(0, 0, Ninjoreo.width, Ninjoreo.height);
 		ninjoreo.draw(g);
 		manager.draw(g);
 	}
@@ -71,14 +72,14 @@ manager.manageEnemies();
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
 
-		g.fillRect(0, 0, Ninjoreo.width, Ninjoreo.height);    
+		g.fillRect(0, 0, Ninjoreo.width, Ninjoreo.height);
 		g.setColor(Color.BLACK);
 		g.setFont(titleFont);
-		g.drawString("Game Over",50,200);
+		g.drawString("Game Over", 50, 200);
 		g.setFont(nontitle);
-		g.drawString("You fatally injured "+0,120,300);
-		g.drawString("fatally injurers",160,350);
-		
+		g.drawString("You fatally injured " + 0, 120, 300);
+		g.drawString("fatally injurers", 160, 350);
+
 	}
 
 	void startGame() {
@@ -91,6 +92,9 @@ manager.manageEnemies();
 		// TODO Auto-generated method stub
 		// object.update();
 		repaint();
+		if (ninjoreo.lose) {
+			updateEndState();
+		}
 		if (currentState == menuState) {
 			updateMenuState();
 		} else if (currentState == gameState) {
@@ -98,6 +102,7 @@ manager.manageEnemies();
 		} else if (currentState == endState) {
 			updateEndState();
 		}
+
 	}
 
 	@Override
@@ -121,25 +126,21 @@ manager.manageEnemies();
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+
 		if (e.getKeyCode() == 39) {
-			
+
 			// System.out.println("hello");
 		}
 		if (e.getKeyCode() == 37) {
-			
+
 		}
 		if (e.getKeyCode() == 40) {
-			
+
 		}
 		if (e.getKeyCode() == 38) {
-			
-			
+
 		}
-		
-		
-		
-		
+
 		// TODO Auto-generated method stub
 		System.out.println("pressed");
 		System.out.println(e.getKeyCode());
@@ -152,34 +153,38 @@ manager.manageEnemies();
 				currentState = menuState;
 
 			}
-		}
-	if(e.getKeyCode()==38) {
-		ninjoreo.jump();
-		
-	}
+			if (currentState == endState) {
+				ninjoreo = new Oreo(ninjoreo.x, ninjoreo.y, 50, 50);
+				manager = new ObjectManager(ninjoreo);
 
-	if(e.getKeyCode()==37) {
-		ninjoreo.xSpeed=-5;
-		
+			}
+		}
+		if (e.getKeyCode() == 38) {
+			ninjoreo.jump();
+
+		}
+
+		if (e.getKeyCode() == 37) {
+			ninjoreo.xSpeed = -5;
+
+		}
+		if (e.getKeyCode() == 39) {
+			ninjoreo.xSpeed = 5;
+
+		}
 	}
-	if(e.getKeyCode()==39) {
-		ninjoreo.xSpeed=5;
-		
-	}
-	}
-	
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("released");
-		if(e.getKeyCode()==37) {
-			ninjoreo.xSpeed=0;
-			
+		if (e.getKeyCode() == 37) {
+			ninjoreo.xSpeed = 0;
+
 		}
-		if(e.getKeyCode()==39) {
-			ninjoreo.xSpeed=0;
-			
+		if (e.getKeyCode() == 39) {
+			ninjoreo.xSpeed = 0;
+
 		}
 	}
 
