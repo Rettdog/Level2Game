@@ -8,7 +8,7 @@ public class ObjectManager {
 	Long logTimer = (long) 0;
 	int logSpawnTime = 750;
 	ArrayList<Platform> list = new ArrayList<Platform>();
-	// ArrayList<Alien> aliens = new ArrayList<Alien>();
+	
 	Oreo oreo;
 	int score;
 
@@ -65,7 +65,8 @@ public class ObjectManager {
 	}
 
 	public void lose() {
-		if (oreo.y >= Ninjoreo.height) {
+		if (Ninjoreo.height<=oreo.y + oreo.height) {
+			System.out.println("lose");
 			oreo.lose = true;
 		}
 	}

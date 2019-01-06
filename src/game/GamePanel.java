@@ -33,19 +33,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateMenuState() {
-		currentState = menuState;
+		// currentState = menuState;
 	}
 
 	void updateGameState() {
-		currentState = gameState;
+		// currentState = gameState;
 		ninjoreo.update();
 		manager.update();
 		manager.manageEnemies();
+		manager.lose();
 
 	}
 
 	void updateEndState() {
-		currentState = endState;
+		// currentState = endState;
 	}
 
 	void drawMenuState(Graphics g) {
@@ -93,7 +94,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// object.update();
 		repaint();
 		if (ninjoreo.lose) {
-			updateEndState();
+			ninjoreo.lose=false;
+			currentState = endState;
 		}
 		if (currentState == menuState) {
 			updateMenuState();
@@ -145,17 +147,23 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		System.out.println("pressed");
 		System.out.println(e.getKeyCode());
 		if (e.getKeyCode() == 10) {
-			// System.out.println(e.getKeyCode());
-			currentState++;
-
-			if (currentState > endState) {
-
-				currentState = menuState;
-
+			if(currentState==menuState) {
+				
 			}
+			
+			currentState++;
+			
+			if (currentState > endState) {
+				
+				currentState = menuState;
+				
+			}
+			
+			
 			if (currentState == endState) {
-				ninjoreo = new Oreo(ninjoreo.x, ninjoreo.y, 50, 50);
+				ninjoreo = new Oreo(250, 350, 50, 50);
 				manager = new ObjectManager(ninjoreo);
+				
 
 			}
 		}
