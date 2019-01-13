@@ -78,7 +78,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(titleFont);
 		g.drawString("Game Over", 50, 200);
 		g.setFont(nontitle);
-		g.drawString("You fatally injured " + 0, 120, 300);
+		g.drawString("You fatally injured " + manager.score / 2, 120, 300);
 		g.drawString("fatally injurers", 160, 350);
 
 	}
@@ -94,7 +94,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// object.update();
 		repaint();
 		if (ninjoreo.lose) {
-			ninjoreo.lose=false;
+			ninjoreo.lose = false;
 			currentState = endState;
 		}
 		if (currentState == menuState) {
@@ -147,25 +147,23 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		System.out.println("pressed");
 		System.out.println(e.getKeyCode());
 		if (e.getKeyCode() == 10) {
-			if(currentState==menuState) {
-				
-			}
-			
-			currentState++;
-			
-			if (currentState > endState) {
-				
-				currentState = menuState;
-				
-			}
-			
-			
-			if (currentState == endState) {
-				ninjoreo = new Oreo(250, 350, 50, 50);
-				manager = new ObjectManager(ninjoreo);
-				
+			if (currentState == menuState) {
 
 			}
+
+			currentState++;
+
+			if (currentState > endState) {
+
+				currentState = menuState;
+
+			}
+
+			if (currentState == menuState) {
+				ninjoreo = new Oreo(250, 350, 50, 50);
+				manager = new ObjectManager(ninjoreo);
+			}
+
 		}
 		if (e.getKeyCode() == 38) {
 			ninjoreo.jump();
