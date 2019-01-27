@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -22,7 +23,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font nontitle;
 	Oreo ninjoreo = new Oreo(250, 350, 50, 50);
-	ObjectManager manager = new ObjectManager(ninjoreo);
+	Background background = new Background(0, -1 * Ninjoreo.height, Ninjoreo.width, 2 * Ninjoreo.height);
+	ObjectManager manager = new ObjectManager(ninjoreo, background);
 	boolean jumping = false;
 
 	GamePanel() {
@@ -63,9 +65,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawGameState(Graphics g) {
-		g.setColor(Color.GREEN);
+		// g.setColor(Color.GREEN);
 
-		g.fillRect(0, 0, Ninjoreo.width, Ninjoreo.height);
+		// g.fillRect(0, 0, Ninjoreo.width, Ninjoreo.height);
 		ninjoreo.draw(g);
 		manager.draw(g);
 	}
@@ -146,6 +148,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		System.out.println("pressed");
 		System.out.println(e.getKeyCode());
+		if (currentState == menuState) {
+			if (e.getKeyCode() == 32) {
+				JOptionPane.showMessageDialog(null,
+						"Use the arrow keys to jump and move.\nJump on the enemies "
+								+ "to make them fall but \nmake sure not to hit them from below"
+								+ ".\nDon't fall down below the screen, too.");
+			}
+		}
 		if (e.getKeyCode() == 10) {
 			if (currentState == menuState) {
 
@@ -160,8 +170,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 
 			if (currentState == menuState) {
+				background = new Background(0, -1 * Ninjoreo.height, Ninjoreo.width, 2 * Ninjoreo.height);
 				ninjoreo = new Oreo(250, 350, 50, 50);
-				manager = new ObjectManager(ninjoreo);
+				manager = new ObjectManager(ninjoreo, background);
 			}
 
 		}

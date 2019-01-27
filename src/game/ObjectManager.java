@@ -11,6 +11,7 @@ public class ObjectManager {
 	int logSpawnTime = 750;
 	ArrayList<Platform> list = new ArrayList<Platform>();
 	ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	Background ground = new Background(0, 100, Ninjoreo.width, Ninjoreo.height);
 	Oreo oreo;
 	int score;
 
@@ -57,8 +58,9 @@ public class ObjectManager {
 		return false;
 	}
 
-	ObjectManager(Oreo oreo) {
+	ObjectManager(Oreo oreo, Background ground) {
 		this.oreo = oreo;
+		this.ground = ground;
 	}
 
 	void addEnemy(Enemy enemy) {
@@ -84,6 +86,7 @@ public class ObjectManager {
 	}
 
 	void draw(Graphics g) {
+		ground.draw(g);
 		oreo.draw(g);
 		// System.out.println(list.size());
 		for (int i = 0; i < list.size(); i++) {
@@ -122,6 +125,7 @@ public class ObjectManager {
 
 		}
 		oreo.setCollision(checkCollision());
+		ground.update();
 	}
 
 	public void lose() {
