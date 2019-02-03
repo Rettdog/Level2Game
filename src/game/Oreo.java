@@ -39,10 +39,11 @@ public class Oreo extends GameObject {
 	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.BLUE);
+		
+		//g.setColor(Color.BLUE);
 
-		g.fillRect(x, y, width, height);
-
+		//g.drawRect(x, y, width, height);
+		g.drawImage(GamePanel.ninjoreoBasic, x, y, width, height, null);
 	}
 
 	void jump() {

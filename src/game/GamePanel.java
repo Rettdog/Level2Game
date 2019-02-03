@@ -7,7 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -17,9 +20,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int menuState = 0;
 	final int gameState = 1;
 	final int endState = 2;
+	public static BufferedImage ninjoreoBasic;
+	public static BufferedImage stick;
 	int currentState = menuState;
 	Timer timer;
 	GameObject object;
+	
 	Font titleFont;
 	Font nontitle;
 	Oreo ninjoreo = new Oreo(250, 350, 50, 50);
@@ -32,6 +38,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// object = new GameObject(10,10,100,100);
 		titleFont = new Font("Arial", Font.PLAIN, 80);
 		nontitle = new Font("Arial", Font.PLAIN, 28);
+		try {
+			ninjoreoBasic = ImageIO.read(this.getClass().getResourceAsStream("NinjoreoBasic.png"));
+			stick = ImageIO.read(this.getClass().getResourceAsStream("Stick.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	void updateMenuState() {
