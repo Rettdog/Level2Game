@@ -23,11 +23,12 @@ public class Enemy extends GameObject {
 	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.BLUE);
+		//g.setColor(Color.BLUE);
 
 		// g.fillRect(x, y, width, height);
-		g.setColor(Color.YELLOW);
-		g.fillRect(x, y, width, height);
+		//g.setColor(Color.YELLOW);
+		//g.fillRect(x, y, width, height);
+		g.drawImage(GamePanel.cookieMonsterImage, x, y, width, height, null);
 
 	}
 

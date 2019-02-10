@@ -19,6 +19,9 @@ public class Platform extends GameObject {
 
 	//	g.setColor(Color.GRAY);
 		//g.fillRect(x, y, width, height);
+		switch(GamePanel.skinState) {
+		case 1:g.drawImage(GamePanel.stick, x, y, width, height, null);
+		}
 		g.drawImage(GamePanel.stick, x, y, width, height, null);
 
 	}

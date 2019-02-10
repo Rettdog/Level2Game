@@ -20,8 +20,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int menuState = 0;
 	final int gameState = 1;
 	final int endState = 2;
+	final int cookieMonster=0;
+	public static int skinState;
 	public static BufferedImage ninjoreoBasic;
 	public static BufferedImage stick;
+	public static BufferedImage cookieMonsterImage;
 	int currentState = menuState;
 	Timer timer;
 	GameObject object;
@@ -35,12 +38,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	GamePanel() {
 		timer = new Timer(1000 / 60, this);
+		skinState=cookieMonster;
 		// object = new GameObject(10,10,100,100);
 		titleFont = new Font("Arial", Font.PLAIN, 80);
 		nontitle = new Font("Arial", Font.PLAIN, 28);
 		try {
 			ninjoreoBasic = ImageIO.read(this.getClass().getResourceAsStream("NinjoreoBasic.png"));
 			stick = ImageIO.read(this.getClass().getResourceAsStream("Stick.png"));
+			cookieMonsterImage = ImageIO.read(this.getClass().getResourceAsStream("CookieMonster.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,7 +99,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Game Over", 50, 200);
 		g.setFont(nontitle);
 		g.drawString("You fatally injured " + manager.score / 2, 120, 300);
-		g.drawString("fatally injurers", 160, 350);
+		switch(skinState) {
+		case 0: g.drawString("cookie monsters", 160, 350);
+		}
+		//g.drawString("fatally injurers", 160, 350);
 
 	}
 
