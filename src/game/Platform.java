@@ -4,15 +4,18 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Platform extends GameObject {
-
+	
+	float speed;
 	Platform(int xp, int yp, int widthp, int heightp) {
 		super(xp, yp, widthp, heightp);
 		// TODO Auto-generated constructor stub
+		speed=5;
 	}
 
 	void update() {
 		super.update();
-		y += 5;
+		y += speed;
+		//speed+=.01;
 	}
 
 	void draw(Graphics g) {

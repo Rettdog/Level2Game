@@ -174,7 +174,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				JOptionPane.showMessageDialog(null,
 						"Use the arrow keys to jump and move.\nJump on the enemies "
 								+ "to make them fall but \nmake sure not to hit them from below"
-								+ ".\nDon't fall down below the screen, too.");
+								+ ".\nDon't fall too fast, or you will fall through \nthe logs and into the abyss");
 			}
 		}
 		if (e.getKeyCode() == 10) {
