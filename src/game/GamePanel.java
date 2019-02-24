@@ -20,32 +20,36 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int menuState = 0;
 	final int gameState = 1;
 	final int endState = 2;
-	final int cookieMonster=0;
+	final int cookieMonster = 0;
 	public static int skinState;
 	public static BufferedImage ninjoreoBasic;
-	public static BufferedImage stick;
+	public static BufferedImage rightFacingStick;
+	public static BufferedImage leftFacingStick;
 	public static BufferedImage cookieMonsterImage;
+	public static BufferedImage treeBackgroundImage;
 	int currentState = menuState;
 	Timer timer;
 	GameObject object;
-	
+
 	Font titleFont;
 	Font nontitle;
 	Oreo ninjoreo = new Oreo(250, 350, 50, 50);
-	Background background = new Background(0, -1 * Ninjoreo.height, Ninjoreo.width, 2 * Ninjoreo.height);
+	Background background = new Background(0, -1 * Ninjoreo.height, Ninjoreo.width, Ninjoreo.height);
 	ObjectManager manager = new ObjectManager(ninjoreo, background);
 	boolean jumping = false;
 
 	GamePanel() {
 		timer = new Timer(1000 / 60, this);
-		skinState=cookieMonster;
+		skinState = cookieMonster;
 		// object = new GameObject(10,10,100,100);
 		titleFont = new Font("Arial", Font.PLAIN, 80);
 		nontitle = new Font("Arial", Font.PLAIN, 28);
 		try {
 			ninjoreoBasic = ImageIO.read(this.getClass().getResourceAsStream("NinjoreoBasic.png"));
-			stick = ImageIO.read(this.getClass().getResourceAsStream("Stick.png"));
+			rightFacingStick = ImageIO.read(this.getClass().getResourceAsStream("RightFacingStick.png"));
+			leftFacingStick = ImageIO.read(this.getClass().getResourceAsStream("LeftFacingStick.png"));
 			cookieMonsterImage = ImageIO.read(this.getClass().getResourceAsStream("CookieMonster.png"));
+			treeBackgroundImage = ImageIO.read(this.getClass().getResourceAsStream("Background.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,10 +103,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Game Over", 50, 200);
 		g.setFont(nontitle);
 		g.drawString("You fatally injured " + manager.score / 2, 120, 300);
-		switch(skinState) {
-		case 0: g.drawString("cookie monsters", 160, 350);
+		switch (skinState) {
+		case 0:
+			g.drawString("cookie monsters", 160, 350);
 		}
-		//g.drawString("fatally injurers", 160, 350);
+		// g.drawString("fatally injurers", 160, 350);
 
 	}
 
@@ -191,7 +196,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 
 			if (currentState == menuState) {
-				background = new Background(0, -1 * Ninjoreo.height, Ninjoreo.width, 2 * Ninjoreo.height);
+				background = new Background(0, -1 * Ninjoreo.height, Ninjoreo.width, Ninjoreo.height);
 				ninjoreo = new Oreo(250, 350, 50, 50);
 				manager = new ObjectManager(ninjoreo, background);
 			}

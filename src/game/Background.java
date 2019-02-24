@@ -1,6 +1,5 @@
 package game;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class Background extends GameObject {
@@ -19,8 +18,9 @@ public class Background extends GameObject {
 	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.GREEN);
-		g.fillRect(x, y, width, height);
+		// g.setColor(Color.GREEN);
+		g.drawImage(GamePanel.treeBackgroundImage, x, y, width, 2 * height, null);
+		// g.fillRect(x, y, width, 2 * height);
 	}
 
 }

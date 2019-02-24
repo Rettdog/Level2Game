@@ -34,9 +34,9 @@ public class ObjectManager {
 			if ((oreo.y < a.y + a.height) && (oreo.y > a.y + a.height / 2)) {
 
 				if ((a.x <= oreo.x + oreo.width) && (a.x + a.width >= oreo.x)) {
-					//oreo.lose = true;
-					oreo.ySpeed=20;
-					//return true;
+					// oreo.lose = true;
+					oreo.ySpeed = 20;
+					// return true;
 
 				}
 			}
@@ -76,10 +76,10 @@ public class ObjectManager {
 	public void manageEnemies() {
 		if (System.currentTimeMillis() - logTimer >= logSpawnTime) {
 			addPlatform(new Platform(new Random().nextInt(Ninjoreo.width - 20), 0, 200, 25));
-			for(Platform platy:list) {
-				platy.speed+=.01;
+			for (Platform platy : list) {
+				platy.speed += .1;
 			}
-			oreo.maxSpeed+=.01;
+			oreo.maxSpeed += .1;
 			System.out.println("add");
 			logTimer = System.currentTimeMillis();
 		}
