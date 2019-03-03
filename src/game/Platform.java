@@ -23,12 +23,15 @@ public class Platform extends GameObject {
 		// g.setColor(Color.GRAY);
 		// g.fillRect(x, y, width, height);
 		switch (GamePanel.skinState) {
-		case 1:
-			g.drawImage(GamePanel.rightFacingStick, x, y, width, height, null);
-		case 2:
-			g.drawImage(GamePanel.leftFacingStick, x, y, width, height, null);
+		case 0:
+			if (x > 150) {
+				g.drawImage(GamePanel.rightFacingStick, x, y, width, height, null);
+			} else {
+				g.drawImage(GamePanel.leftFacingStick, x, y, width, height, null);
+			}
+
 		}
-		g.drawImage(GamePanel.rightFacingStick, x, y, width, height, null);
+		// g.drawImage(GamePanel.rightFacingStick, x, y, width, height, null);
 
 	}
 

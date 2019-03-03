@@ -1,6 +1,5 @@
 package game;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class Oreo extends GameObject {
@@ -16,7 +15,7 @@ public class Oreo extends GameObject {
 		ySpeed = 0;
 		xSpeed = 0;
 		doublejump = 2;
-		maxSpeed=17.5;
+		maxSpeed = 17.5;
 	}
 
 	void update() {
@@ -25,20 +24,21 @@ public class Oreo extends GameObject {
 		y += ySpeed;
 		x += xSpeed;
 		ySpeed += .7;
-		//maxSpeed+=.01;
-		
-		/*if (y > Ninjoreo.height - height) {
-			y = Ninjoreo.height - height;
-			doublejump = 2;
+		// maxSpeed+=.01;
 
-		
-		}*/
+		/*
+		 * if (y > Ninjoreo.height - height) { y = Ninjoreo.height - height; doublejump
+		 * = 2;
+		 * 
+		 * 
+		 * }
+		 */
 		if (collided && ySpeed >= 0) {
 			doublejump = 2;
 			ySpeed = -1;
 		}
-		if(ySpeed>=maxSpeed) {
-			ySpeed=(float) maxSpeed;
+		if (ySpeed >= maxSpeed) {
+			ySpeed = (float) maxSpeed;
 		}
 
 	}
@@ -49,18 +49,18 @@ public class Oreo extends GameObject {
 	}
 
 	void draw(Graphics g) {
-		
-		//g.setColor(Color.BLUE);
 
-		//g.drawRect(x, y, width, height);
+		// g.setColor(Color.BLUE);
+
+		// g.drawRect(x, y, width, height);
 		g.drawImage(GamePanel.ninjoreoBasic, x, y, width, height, null);
 	}
 
 	void jump() {
-		 //if (doublejump > 0) {
+		if (doublejump > 0) {
 			ySpeed = -17;
 			doublejump -= 1;
-		//}
+		}
 	}
 
 }

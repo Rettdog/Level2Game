@@ -75,7 +75,7 @@ public class ObjectManager {
 
 	public void manageEnemies() {
 		if (System.currentTimeMillis() - logTimer >= logSpawnTime) {
-			addPlatform(new Platform(new Random().nextInt(Ninjoreo.width - 20), 0, 200, 25));
+			addPlatform(new Platform(new Random().nextInt(Ninjoreo.width) - 100, -25, 200, 25));
 			for (Platform platy : list) {
 				platy.speed += .1;
 			}

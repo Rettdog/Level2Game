@@ -33,7 +33,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	Font titleFont;
 	Font nontitle;
-	Oreo ninjoreo = new Oreo(250, 350, 50, 50);
+	Font subtitleFont;
+	Oreo ninjoreo = new Oreo(200, 650, 50, 50);
 	Background background = new Background(0, -1 * Ninjoreo.height, Ninjoreo.width, Ninjoreo.height);
 	ObjectManager manager = new ObjectManager(ninjoreo, background);
 	boolean jumping = false;
@@ -44,6 +45,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// object = new GameObject(10,10,100,100);
 		titleFont = new Font("Arial", Font.PLAIN, 80);
 		nontitle = new Font("Arial", Font.PLAIN, 28);
+		subtitleFont = new Font("Arial", Font.PLAIN, 40);
 		try {
 			ninjoreoBasic = ImageIO.read(this.getClass().getResourceAsStream("NinjoreoBasic.png"));
 			rightFacingStick = ImageIO.read(this.getClass().getResourceAsStream("RightFacingStick.png"));
@@ -58,6 +60,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateMenuState() {
 		// currentState = menuState;
+		ninjoreo.update();
+
 	}
 
 	void updateGameState() {
@@ -71,18 +75,32 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateEndState() {
 		// currentState = endState;
+		background.update();
 	}
 
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.BLUE);
 
-		g.fillRect(0, 0, Ninjoreo.width, Ninjoreo.height);
+		g.drawImage(treeBackgroundImage, 0, 0, Ninjoreo.width, 2 * Ninjoreo.height, null);
 		g.setColor(Color.BLACK);
 		g.setFont(titleFont);
 		g.drawString("Ninjoreo", 100, 200);
 		g.setFont(nontitle);
 		g.drawString("Press enter to start", 120, 300);
 		g.drawString("Press space for instructions", 75, 400);
+		if (ninjoreo.y > 700) {
+			ninjoreo.jump();
+		}
+		if (ninjoreo.x < 0) {
+			ninjoreo.x = 0;
+		}
+		if (ninjoreo.x > Ninjoreo.width - 50) {
+			ninjoreo.x = Ninjoreo.width - 50;
+		}
+		if (ninjoreo.y < 1) {
+			ninjoreo.ySpeed = 20;
+		}
+		ninjoreo.draw(g);
 
 	}
 
@@ -96,18 +114,32 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
-
-		g.fillRect(0, 0, Ninjoreo.width, Ninjoreo.height);
+		background.speed = 1;
+		background.draw(g);
 		g.setColor(Color.BLACK);
 		g.setFont(titleFont);
+		g.drawString("Game Over", 53, 203);
+		g.setColor(Color.RED);
+		g.setFont(titleFont);
 		g.drawString("Game Over", 50, 200);
+		g.setColor(Color.BLACK);
 		g.setFont(nontitle);
-		g.drawString("You fatally injured " + manager.score / 2, 120, 300);
+		g.drawString("You totally wrecked " + manager.score / 2, 122, 302);
+		g.setColor(Color.RED);
+		g.drawString("You totally wrecked " + manager.score / 2, 120, 300);
 		switch (skinState) {
 		case 0:
+			g.setColor(Color.BLACK);
+			g.drawString("cookie monsters", 162, 352);
+			g.setColor(Color.RED);
 			g.drawString("cookie monsters", 160, 350);
 		}
 		// g.drawString("fatally injurers", 160, 350);
+		g.setColor(Color.BLACK);
+		g.setFont(subtitleFont);
+		g.drawString("Press enter to proceed", 52, 452);
+		g.setColor(Color.RED);
+		g.drawString("Press enter to proceed", 50, 450);
 
 	}
 
@@ -175,6 +207,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		System.out.println("pressed");
 		System.out.println(e.getKeyCode());
 		if (currentState == menuState) {
+
 			if (e.getKeyCode() == 32) {
 				JOptionPane.showMessageDialog(null,
 						"Use the arrow keys to jump and move.\nJump on the enemies "
@@ -184,6 +217,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == 10) {
 			if (currentState == menuState) {
+				System.out.println("enter");
+				ninjoreo.doublejump = 3;
+				ninjoreo.jump();
 
 			}
 
@@ -197,7 +233,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 			if (currentState == menuState) {
 				background = new Background(0, -1 * Ninjoreo.height, Ninjoreo.width, Ninjoreo.height);
-				ninjoreo = new Oreo(250, 350, 50, 50);
+				ninjoreo = new Oreo(200, 650, 50, 50);
 				manager = new ObjectManager(ninjoreo, background);
 			}
 
