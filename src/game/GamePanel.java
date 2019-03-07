@@ -21,12 +21,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int gameState = 1;
 	final int endState = 2;
 	final int cookieMonster = 0;
+	final int marshmaulerSkin = 1;
 	public static int skinState;
 	public static BufferedImage ninjoreoBasic;
 	public static BufferedImage rightFacingStick;
 	public static BufferedImage leftFacingStick;
 	public static BufferedImage cookieMonsterImage;
+	public static BufferedImage marshMauler;
 	public static BufferedImage treeBackgroundImage;
+	public static BufferedImage fireImage;
+	public static BufferedImage smokeBackgroundImage;
 	int currentState = menuState;
 	Timer timer;
 	GameObject object;
@@ -41,7 +45,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	GamePanel() {
 		timer = new Timer(1000 / 60, this);
-		skinState = cookieMonster;
+		//skinState = cookieMonster;
+		skinState = marshmaulerSkin;
 		// object = new GameObject(10,10,100,100);
 		titleFont = new Font("Arial", Font.PLAIN, 80);
 		nontitle = new Font("Arial", Font.PLAIN, 28);
@@ -52,6 +57,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			leftFacingStick = ImageIO.read(this.getClass().getResourceAsStream("LeftFacingStick.png"));
 			cookieMonsterImage = ImageIO.read(this.getClass().getResourceAsStream("CookieMonster.png"));
 			treeBackgroundImage = ImageIO.read(this.getClass().getResourceAsStream("Background.png"));
+			marshMauler =ImageIO.read(this.getClass().getResourceAsStream("MarshMauler.png"));
+			fireImage =ImageIO.read(this.getClass().getResourceAsStream("Fire.png"));
+			smokeBackgroundImage = ImageIO.read(this.getClass().getResourceAsStream("SmokeBackground.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,11 +88,20 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.BLUE);
-
-		g.drawImage(treeBackgroundImage, 0, 0, Ninjoreo.width, 2 * Ninjoreo.height, null);
+background.draw(g);
+		
 		g.setColor(Color.BLACK);
 		g.setFont(titleFont);
-		g.drawString("Ninjoreo", 100, 200);
+		switch(skinState) {
+		case 0:
+			g.drawString("Ninjoreo", 100, 200);
+		break;
+		case 1:
+			g.drawString("Marsh", 100, 180);
+			g.drawString("Mauler", 100, 250);
+		break;
+		}
+		
 		g.setFont(nontitle);
 		g.drawString("Press enter to start", 120, 300);
 		g.drawString("Press space for instructions", 75, 400);
@@ -125,17 +142,30 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.RED);
 		g.setFont(titleFont);
 		g.drawString("Game Over", 50, 200);
-		g.setColor(Color.BLACK);
-		g.setFont(nontitle);
-		g.drawString("You totally wrecked " + manager.score / 2, 122, 302);
-		g.setColor(Color.RED);
-		g.drawString("You totally wrecked " + manager.score / 2, 120, 300);
+		
 		switch (skinState) {
 		case 0:
+			g.setColor(Color.BLACK);
+			g.setFont(nontitle);
+			g.drawString("You totally wrecked " + manager.score / 2, 122, 302);
+			g.setColor(Color.RED);
+			g.drawString("You totally wrecked " + manager.score / 2, 120, 300);
 			g.setColor(Color.BLACK);
 			g.drawString("cookie monsters", 162, 352);
 			g.setColor(Color.RED);
 			g.drawString("cookie monsters", 160, 350);
+		break;
+		case 1:
+			g.setColor(Color.BLACK);
+			g.setFont(nontitle);
+			g.drawString("You absorbed " + manager.score / 2, 122, 302);
+			g.setColor(Color.RED);
+			g.drawString("You absorbed " + manager.score / 2, 120, 300);
+			g.setColor(Color.BLACK);
+			g.drawString("fireballs", 162, 352);
+			g.setColor(Color.RED);
+			g.drawString("fireballs", 160, 350);
+		break;
 		}
 		// g.drawString("fatally injurers", 160, 350);
 		g.setColor(Color.BLACK);
@@ -160,7 +190,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			ninjoreo.lose = false;
 			currentState = endState;
 		}
-		if (currentState == menuState) {
+		if (currentState == menuState) { 
 			updateMenuState();
 		} else if (currentState == gameState) {
 			updateGameState();
@@ -212,11 +242,23 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (currentState == menuState) {
 
 			if (e.getKeyCode() == 32) {
-				JOptionPane.showMessageDialog(null,
-						"Use the side arrows to move side to side and the up arrow to jump.\nJump on the enemies "
-								+ "to make them fall but \nmake sure not to hit them from below"
-								+ ".\nDon't fall too fast, or you will fall through \nthe logs and into the abyss"
-								+ "\nYou can test out the controls on this screen.");
+				switch(skinState) {
+				case 0:
+					JOptionPane.showMessageDialog(null,
+							"Use the side arrows to move side to side and the up arrow to jump.\nJump on the cookie monsters "
+									+ "to make them fall but \nmake sure not to hit them from below"
+									+ ".\nDon't fall too fast, or you will fall through \nthe logs and into the abyss"
+									+ "\nYou can test out the controls on this screen.");
+				break;
+				case 1:
+					JOptionPane.showMessageDialog(null,
+							"Use the side arrows to move side to side and the up arrow to jump.\nJump on the fireballs "
+									+ "to make them fall but \nmake sure not to hit them from below or you will melt into the fire"
+									+ ".\nDon't fall too fast, or you will fall through \nthe logs and into the fire below"
+									+ "\nYou can test out the controls on this screen.");
+				break;
+				}
+				
 			}
 		}
 		if (e.getKeyCode() == 10) {

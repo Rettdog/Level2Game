@@ -29,6 +29,14 @@ public class Platform extends GameObject {
 			} else {
 				g.drawImage(GamePanel.leftFacingStick, x, y, width, height, null);
 			}
+		break;
+		case 1:
+			if (x > 150) {
+				g.drawImage(GamePanel.rightFacingStick, x, y, width, height, null);
+			} else {
+				g.drawImage(GamePanel.leftFacingStick, x, y, width, height, null);
+			}
+		break;
 
 		}
 		// g.drawImage(GamePanel.rightFacingStick, x, y, width, height, null);

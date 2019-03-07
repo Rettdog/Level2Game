@@ -53,7 +53,15 @@ public class Oreo extends GameObject {
 		// g.setColor(Color.BLUE);
 
 		// g.drawRect(x, y, width, height);
-		g.drawImage(GamePanel.ninjoreoBasic, x, y, width, height, null);
+		switch(GamePanel.skinState) {
+		case 0:
+			g.drawImage(GamePanel.ninjoreoBasic, x, y, width, height, null);
+			break;
+		case 1:
+			g.drawImage(GamePanel.marshMauler, x, y, width, height, null);
+			break;
+		}
+		
 	}
 
 	void jump() {

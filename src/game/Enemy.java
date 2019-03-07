@@ -29,7 +29,17 @@ speed=3;
 		// g.fillRect(x, y, width, height);
 		//g.setColor(Color.YELLOW);
 		//g.fillRect(x, y, width, height);
-		g.drawImage(GamePanel.cookieMonsterImage, x, y, width, height, null);
+		switch(GamePanel.skinState) {
+		case 0:
+			g.drawImage(GamePanel.cookieMonsterImage, x, y, width, height, null);
+			
+		break;
+		case 1:
+			g.drawImage(GamePanel.fireImage, x, y, width, height, null);
+		break;
+		}
+		
+		
 
 	}
 

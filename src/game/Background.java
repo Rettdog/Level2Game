@@ -21,7 +21,16 @@ public class Background extends GameObject {
 
 	void draw(Graphics g) {
 		// g.setColor(Color.GREEN);
-		g.drawImage(GamePanel.treeBackgroundImage, x, y, width, 2 * height, null);
+		
+		switch(GamePanel.skinState) {
+		case 0:
+			g.drawImage(GamePanel.treeBackgroundImage, x, y, width, 2 * height, null);
+		break;
+		case 1:
+			g.drawImage(GamePanel.smokeBackgroundImage, x, y, width, 2 * height, null);
+		break;
+		}
+		
 		// g.fillRect(x, y, width, 2 * height);
 	}
 
