@@ -5,12 +5,13 @@ import java.awt.Graphics;
 
 public class Enemy extends GameObject {
 	boolean collision;
+	double speed;
 
 	Enemy(int xp, int yp, int widthp, int heightp) {
 		super(xp, yp, widthp, heightp);
 		// TODO Auto-generated constructor stub
 		collision = false;
-
+speed=3;
 	}
 
 	void update() {
@@ -18,7 +19,7 @@ public class Enemy extends GameObject {
 		if (collision) {
 			y += 20;
 		} else {
-			y += 5;
+			y += speed;
 		}
 	}
 

@@ -3,12 +3,12 @@ package game;
 import java.awt.Graphics;
 
 public class Background extends GameObject {
-	int speed;
+	double speed;
 
 	Background(int xp, int yp, int widthp, int heightp) {
 		super(xp, yp, widthp, heightp);
 		// TODO Auto-generated constructor stub
-		speed = 5;
+		speed = 3;
 	}
 
 	void update() {

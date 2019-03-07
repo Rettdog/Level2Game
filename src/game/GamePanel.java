@@ -88,7 +88,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(nontitle);
 		g.drawString("Press enter to start", 120, 300);
 		g.drawString("Press space for instructions", 75, 400);
+		ninjoreo.doublejump=5;
+		
 		if (ninjoreo.y > 700) {
+			ninjoreo.doublejump=5;
 			ninjoreo.jump();
 		}
 		if (ninjoreo.x < 0) {
@@ -183,7 +186,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("typed");
+		//System.out.println("typed");
 	}
 
 	@Override
@@ -204,15 +207,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 
 		// TODO Auto-generated method stub
-		System.out.println("pressed");
-		System.out.println(e.getKeyCode());
+		//System.out.println("pressed");
+		//System.out.println(e.getKeyCode());
 		if (currentState == menuState) {
 
 			if (e.getKeyCode() == 32) {
 				JOptionPane.showMessageDialog(null,
-						"Use the arrow keys to jump and move.\nJump on the enemies "
+						"Use the side arrows to move side to side and the up arrow to jump.\nJump on the enemies "
 								+ "to make them fall but \nmake sure not to hit them from below"
-								+ ".\nDon't fall too fast, or you will fall through \nthe logs and into the abyss");
+								+ ".\nDon't fall too fast, or you will fall through \nthe logs and into the abyss"
+								+ "\nYou can test out the controls on this screen.");
 			}
 		}
 		if (e.getKeyCode() == 10) {
@@ -256,7 +260,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("released");
+		//System.out.println("released");
 		if (e.getKeyCode() == 37) {
 			ninjoreo.xSpeed = 0;
 

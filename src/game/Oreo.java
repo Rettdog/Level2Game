@@ -15,11 +15,11 @@ public class Oreo extends GameObject {
 		ySpeed = 0;
 		xSpeed = 0;
 		doublejump = 2;
-		maxSpeed = 17.5;
+		maxSpeed = 15.4;
 	}
 
 	void update() {
-		System.out.println(ySpeed);
+		//System.out.println(ySpeed);
 		super.update();
 		y += ySpeed;
 		x += xSpeed;

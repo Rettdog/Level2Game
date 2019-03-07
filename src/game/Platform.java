@@ -4,12 +4,12 @@ import java.awt.Graphics;
 
 public class Platform extends GameObject {
 
-	float speed;
+	double speed=3;
 
 	Platform(int xp, int yp, int widthp, int heightp) {
 		super(xp, yp, widthp, heightp);
 		// TODO Auto-generated constructor stub
-		speed = 5;
+		
 	}
 
 	void update() {
