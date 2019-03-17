@@ -2,6 +2,7 @@ package game;
 
 import java.awt.Dimension;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class Ninjoreo {
@@ -11,6 +12,7 @@ public class Ninjoreo {
 	
 	
 	GamePanel superPanel;
+	
 
 	Ninjoreo() {
 		frame = new JFrame();
@@ -18,6 +20,7 @@ public class Ninjoreo {
 
 		superPanel = new GamePanel();
 		frame.addKeyListener(superPanel);
+		frame.addMouseListener(superPanel);
 	}
 	
 	public static void main(String[] args) {
@@ -26,6 +29,7 @@ public class Ninjoreo {
 	}
 
 	void setup() {
+		
 		frame.add(superPanel);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

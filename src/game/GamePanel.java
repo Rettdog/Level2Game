@@ -7,21 +7,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener {
+public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener {
 
 	final int menuState = 0;
 	final int gameState = 1;
 	final int endState = 2;
 	final int cookieMonster = 0;
-	final int marshmaulerSkin = 1;
+	final int marshMaulerSkin = 1;
 	public static int skinState;
 	public static BufferedImage ninjoreoBasic;
 	public static BufferedImage rightFacingStick;
@@ -34,7 +37,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int currentState = menuState;
 	Timer timer;
 	GameObject object;
-
+	ThemeButton button;
 	Font titleFont;
 	Font nontitle;
 	Font subtitleFont;
@@ -45,8 +48,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	GamePanel() {
 		timer = new Timer(1000 / 60, this);
+		button = new ThemeButton(375,50,100,100);
+		//button.addActionListener(this);
 		//skinState = cookieMonster;
-		skinState = marshmaulerSkin;
+		skinState = marshMaulerSkin;
 		// object = new GameObject(10,10,100,100);
 		titleFont = new Font("Arial", Font.PLAIN, 80);
 		nontitle = new Font("Arial", Font.PLAIN, 28);
@@ -87,8 +92,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawMenuState(Graphics g) {
+		
 		g.setColor(Color.BLUE);
 background.draw(g);
+button.draw(g);
 		
 		g.setColor(Color.BLACK);
 		g.setFont(titleFont);
@@ -311,6 +318,48 @@ background.draw(g);
 			ninjoreo.xSpeed = 0;
 
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("clicked");
+		if(button.checkClicked(e.getX(), e.getY())) {
+			skinState++;
+			System.out.println("upper");
+			if(skinState>1) {
+				skinState=0;
+			}
+			if(skinState==marshMaulerSkin) {
+				skinState=marshMaulerSkin;
+			}
+		}
+		
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
