@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	public static BufferedImage treeBackgroundImage;
 	public static BufferedImage fireImage;
 	public static BufferedImage smokeBackgroundImage;
+	public static BufferedImage themeButtonImage;
 	int currentState = menuState;
 	Timer timer;
 	GameObject object;
@@ -48,7 +49,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	GamePanel() {
 		timer = new Timer(1000 / 60, this);
-		button = new ThemeButton(375,50,100,100);
+		button = new ThemeButton(325,650,100,100);
 		//button.addActionListener(this);
 		//skinState = cookieMonster;
 		skinState = marshMaulerSkin;
@@ -64,6 +65,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			treeBackgroundImage = ImageIO.read(this.getClass().getResourceAsStream("Background.png"));
 			marshMauler =ImageIO.read(this.getClass().getResourceAsStream("MarshMauler.png"));
 			fireImage =ImageIO.read(this.getClass().getResourceAsStream("Fire.png"));
+			themeButtonImage=ImageIO.read(this.getClass().getResourceAsStream("button.png"));
 			smokeBackgroundImage = ImageIO.read(this.getClass().getResourceAsStream("SmokeBackground.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -95,7 +97,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		
 		g.setColor(Color.BLUE);
 background.draw(g);
-button.draw(g);
+
 		
 		g.setColor(Color.BLACK);
 		g.setFont(titleFont);
@@ -118,6 +120,7 @@ button.draw(g);
 			ninjoreo.doublejump=5;
 			ninjoreo.jump();
 		}
+		
 		if (ninjoreo.x < 0) {
 			ninjoreo.x = 0;
 		}
@@ -128,7 +131,7 @@ button.draw(g);
 			ninjoreo.ySpeed = 20;
 		}
 		ninjoreo.draw(g);
-
+		button.draw(g);
 	}
 
 	void drawGameState(Graphics g) {

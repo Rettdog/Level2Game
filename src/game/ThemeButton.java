@@ -33,8 +33,9 @@ public class ThemeButton extends GameObject{
 	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.BLUE);
-		g.fillRect(x, y-25, width, height);
+		//g.setColor(Color.BLUE);
+		//g.fillRect(x, y-25, width, height);
+		g.drawImage(GamePanel.themeButtonImage, x, y-25, width, height, null);
 		
 			
 	}
