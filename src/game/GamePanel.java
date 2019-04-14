@@ -25,6 +25,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	final int endState = 2;
 	final int cookieMonster = 0;
 	final int marshMaulerSkin = 1;
+	final int ninCheezitSkin = 2;
 	public static int skinState;
 	public static BufferedImage ninjoreoBasic;
 	public static BufferedImage rightFacingStick;
@@ -35,6 +36,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	public static BufferedImage fireImage;
 	public static BufferedImage smokeBackgroundImage;
 	public static BufferedImage themeButtonImage;
+	public static BufferedImage ninCheezitClosed;
+	public static BufferedImage ninCheezitLargeSquint;
+	public static BufferedImage ninCheezitNormal;
+	public static BufferedImage ninCheezitSquint;
+	public static BufferedImage ninCheezitTongue;
+	public static BufferedImage knifeImage;
 	int currentState = menuState;
 	Timer timer;
 	GameObject object;
@@ -52,7 +59,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		button = new ThemeButton(325,650,100,100);
 		//button.addActionListener(this);
 		//skinState = cookieMonster;
-		skinState = marshMaulerSkin;
+		skinState = cookieMonster;
 		// object = new GameObject(10,10,100,100);
 		titleFont = new Font("Arial", Font.PLAIN, 80);
 		nontitle = new Font("Arial", Font.PLAIN, 28);
@@ -67,6 +74,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			fireImage =ImageIO.read(this.getClass().getResourceAsStream("Fire.png"));
 			themeButtonImage=ImageIO.read(this.getClass().getResourceAsStream("button.png"));
 			smokeBackgroundImage = ImageIO.read(this.getClass().getResourceAsStream("SmokeBackground.png"));
+			knifeImage = ImageIO.read(this.getClass().getResourceAsStream("Knife.png"));
+			ninCheezitClosed = ImageIO.read(this.getClass().getResourceAsStream("NinCheezit/NinCheezitClosed.png"));
+			ninCheezitLargeSquint = ImageIO.read(this.getClass().getResourceAsStream("NinCheezit/NinCheezitLargeSquint.png"));
+			ninCheezitNormal = ImageIO.read(this.getClass().getResourceAsStream("NinCheezit/NinCheezitNormal.png"));
+			ninCheezitSquint = ImageIO.read(this.getClass().getResourceAsStream("NinCheezit/NinCheezitSquint.png"));
+			ninCheezitTongue = ImageIO.read(this.getClass().getResourceAsStream("NinCheezit/NinCheezitTongue.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -109,6 +122,10 @@ background.draw(g);
 			g.drawString("Marsh", 100, 180);
 			g.drawString("Mauler", 100, 250);
 		break;
+		case 2:
+			g.drawString("NinCheezit", 60, 200);
+		break;
+		
 		}
 		
 		g.setFont(nontitle);
@@ -175,6 +192,17 @@ background.draw(g);
 			g.drawString("fireballs", 162, 352);
 			g.setColor(Color.RED);
 			g.drawString("fireballs", 160, 350);
+		break;
+		case 2:
+			g.setColor(Color.BLACK);
+			g.setFont(nontitle);
+			g.drawString("You destroyed " + manager.score / 2, 122, 302);
+			g.setColor(Color.RED);
+			g.drawString("You destroyed " + manager.score / 2, 120, 300);
+			g.setColor(Color.BLACK);
+			g.drawString("knives", 194, 352);
+			g.setColor(Color.RED);
+			g.drawString("knives", 192, 350);
 		break;
 		}
 		// g.drawString("fatally injurers", 160, 350);
@@ -330,11 +358,14 @@ background.draw(g);
 		if(button.checkClicked(e.getX(), e.getY())) {
 			skinState++;
 			System.out.println("upper");
-			if(skinState>1) {
+			if(skinState>2) {
 				skinState=0;
 			}
 			if(skinState==marshMaulerSkin) {
 				skinState=marshMaulerSkin;
+			}
+			if(skinState==ninCheezitSkin) {
+				skinState=ninCheezitSkin;
 			}
 		}
 		

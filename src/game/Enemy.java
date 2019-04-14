@@ -37,6 +37,9 @@ speed=3;
 		case 1:
 			g.drawImage(GamePanel.fireImage, x, y, width, height, null);
 		break;
+		case 2:
+			g.drawImage(GamePanel.knifeImage, x, y, width, height, null);
+		break;
 		}
 		
 		

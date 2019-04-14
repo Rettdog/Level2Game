@@ -29,6 +29,9 @@ public class Background extends GameObject {
 		case 1:
 			g.drawImage(GamePanel.smokeBackgroundImage, x, y, width, 2 * height, null);
 		break;
+		case 2:
+			g.drawImage(GamePanel.smokeBackgroundImage, x, y, width, 2 * height, null);
+		break;
 		}
 		
 		// g.fillRect(x, y, width, 2 * height);
