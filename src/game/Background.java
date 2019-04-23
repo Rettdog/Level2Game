@@ -30,7 +30,7 @@ public class Background extends GameObject {
 			g.drawImage(GamePanel.smokeBackgroundImage, x, y, width, 2 * height, null);
 		break;
 		case 2:
-			g.drawImage(GamePanel.smokeBackgroundImage, x, y, width, 2 * height, null);
+			g.drawImage(GamePanel.kitchenBackgroundImage, x, y, width, 2 * height, null);
 		break;
 		}
 		

@@ -42,6 +42,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	public static BufferedImage ninCheezitSquint;
 	public static BufferedImage ninCheezitTongue;
 	public static BufferedImage knifeImage;
+	public static BufferedImage plateImage;
+	public static BufferedImage kitchenBackgroundImage;
 	int currentState = menuState;
 	Timer timer;
 	GameObject object;
@@ -80,6 +82,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			ninCheezitNormal = ImageIO.read(this.getClass().getResourceAsStream("NinCheezit/NinCheezitNormal.png"));
 			ninCheezitSquint = ImageIO.read(this.getClass().getResourceAsStream("NinCheezit/NinCheezitSquint.png"));
 			ninCheezitTongue = ImageIO.read(this.getClass().getResourceAsStream("NinCheezit/NinCheezitTongue.png"));
+			plateImage = ImageIO.read(this.getClass().getResourceAsStream("Plate.png"));
+			kitchenBackgroundImage = ImageIO.read(this.getClass().getResourceAsStream("Kitchen.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -293,6 +297,13 @@ background.draw(g);
 							"Use the side arrows to move side to side and the up arrow to jump.\nJump on the fireballs "
 									+ "to make them fall but \nmake sure not to hit them from below or you will melt into the fire"
 									+ ".\nDon't fall too fast, or you will fall through \nthe logs and into the fire below"
+									+ "\nYou can test out the controls on this screen.");
+				break;
+				case 2:
+					JOptionPane.showMessageDialog(null,
+							"Use the side arrows to move side to side and the up arrow to jump.\nJump on the knife "
+									+ "to make them fall but \nmake sure not to hit them from below or you will cut into crumbs"
+									+ ".\nDon't fall too fast, or you will fall through \nthe plates and onto the floor below"
 									+ "\nYou can test out the controls on this screen.");
 				break;
 				}
