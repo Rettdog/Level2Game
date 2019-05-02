@@ -26,6 +26,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	final int cookieMonster = 0;
 	final int marshMaulerSkin = 1;
 	final int ninCheezitSkin = 2;
+	final int totoroSkin = 3;
 	public static int skinState;
 	public static BufferedImage ninjoreoBasic;
 	public static BufferedImage rightFacingStick;
@@ -44,6 +45,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	public static BufferedImage knifeImage;
 	public static BufferedImage plateImage;
 	public static BufferedImage kitchenBackgroundImage;
+	public static BufferedImage totoroImage;
+	public static BufferedImage dustSpiritImage;
+	public static BufferedImage acornImage;
 	int currentState = menuState;
 	Timer timer;
 	GameObject object;
@@ -84,6 +88,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			ninCheezitTongue = ImageIO.read(this.getClass().getResourceAsStream("NinCheezit/NinCheezitTongue.png"));
 			plateImage = ImageIO.read(this.getClass().getResourceAsStream("Plate.png"));
 			kitchenBackgroundImage = ImageIO.read(this.getClass().getResourceAsStream("Kitchen.png"));
+			totoroImage =ImageIO.read(this.getClass().getResourceAsStream("totoro.png"));
+			dustSpiritImage = ImageIO.read(this.getClass().getResourceAsStream("dustSpirit.png"));
+			acornImage= ImageIO.read(this.getClass().getResourceAsStream("Acorn.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -120,6 +127,7 @@ background.draw(g);
 		g.setFont(titleFont);
 		switch(skinState) {
 		case 0:
+			g.setColor(Color.LIGHT_GRAY);
 			g.drawString("Ninjoreo", 100, 200);
 		break;
 		case 1:
@@ -128,6 +136,10 @@ background.draw(g);
 		break;
 		case 2:
 			g.drawString("NinCheezit", 60, 200);
+		break;
+		case 3:
+			g.setColor(Color.CYAN);
+			g.drawString("ToToRo!", 80, 200);
 		break;
 		
 		}
@@ -208,13 +220,37 @@ background.draw(g);
 			g.setColor(Color.RED);
 			g.drawString("knives", 192, 350);
 		break;
+		case 3:
+			g.setColor(Color.BLACK);
+			g.setFont(nontitle);
+			g.drawString("You scattered " + manager.score / 2, 142, 302);
+			g.setColor(Color.GRAY);
+			g.drawString("You scattered " + manager.score / 2, 140, 300);
+			g.setColor(Color.BLACK);
+			g.drawString("dust spirits", 174, 352);
+			g.setColor(Color.GRAY);
+			g.drawString("dust spirits", 172, 350);
+			g.setColor(Color.BLACK);
+			g.drawString("and", 220, 392);
+			g.setColor(Color.RED);
+			g.drawString("and", 218, 390);
+			g.setColor(Color.BLACK);
+			g.setFont(nontitle);
+			g.drawString("collected " + manager.secondScore / 2, 172, 442);
+			g.setColor(Color.ORANGE);
+			g.drawString("collected " + manager.secondScore / 2, 170, 440);
+			g.setColor(Color.BLACK);
+			g.drawString("acorns", 200, 494);
+			g.setColor(Color.ORANGE);
+			g.drawString("acorns", 198, 492);
+		break;
 		}
 		// g.drawString("fatally injurers", 160, 350);
 		g.setColor(Color.BLACK);
 		g.setFont(subtitleFont);
-		g.drawString("Press enter to proceed", 52, 452);
+		g.drawString("Press enter to proceed", 52, 612);
 		g.setColor(Color.RED);
-		g.drawString("Press enter to proceed", 50, 450);
+		g.drawString("Press enter to proceed", 50, 610);
 
 	}
 
@@ -290,21 +326,28 @@ background.draw(g);
 							"Use the side arrows to move side to side and the up arrow to jump.\nJump on the cookie monsters "
 									+ "to make them fall but \nmake sure not to hit them from below"
 									+ ".\nDon't fall too fast, or you will fall through \nthe logs and into the abyss"
-									+ "\nYou can test out the controls on this screen.");
+									+ "\nYou can test out the controls on this screen but \\nin the real game you only have 1 double jump.");
 				break;
 				case 1:
 					JOptionPane.showMessageDialog(null,
 							"Use the side arrows to move side to side and the up arrow to jump.\nJump on the fireballs "
 									+ "to make them fall but \nmake sure not to hit them from below or you will melt into the fire"
 									+ ".\nDon't fall too fast, or you will fall through \nthe logs and into the fire below"
-									+ "\nYou can test out the controls on this screen.");
+									+ "\nYou can test out the controls on this screen but \nin the real game you only have 1 double jump.");
 				break;
 				case 2:
 					JOptionPane.showMessageDialog(null,
-							"Use the side arrows to move side to side and the up arrow to jump.\nJump on the knife "
+							"Use the side arrows to move side to side and the up arrow to jump.\nJump on the knifes "
 									+ "to make them fall but \nmake sure not to hit them from below or you will cut into crumbs"
 									+ ".\nDon't fall too fast, or you will fall through \nthe plates and onto the floor below"
-									+ "\nYou can test out the controls on this screen.");
+									+ "\nYou can test out the controls on this screen but \\nin the real game you only have 1 double jump.");
+				break;
+				case 3:
+					JOptionPane.showMessageDialog(null,
+							"Use the side arrows to move side to side and the up arrow to jump.\nJump on the dust spirits "
+									+ "to make them fall but \nmake sure not to hit them from below or you will fall instead"
+									+ ".\nCollecting acorns will give you special points.\nDon't fall too fast, or you will fall through \nthe logs and into the abyss below"
+									+ "\nYou can test out the controls on this screen but \\nin the real game you only have 1 double jump.");
 				break;
 				}
 				
@@ -369,7 +412,7 @@ background.draw(g);
 		if(button.checkClicked(e.getX(), e.getY())) {
 			skinState++;
 			System.out.println("upper");
-			if(skinState>2) {
+			if(skinState>3) {
 				skinState=0;
 			}
 			if(skinState==marshMaulerSkin) {
@@ -377,6 +420,9 @@ background.draw(g);
 			}
 			if(skinState==ninCheezitSkin) {
 				skinState=ninCheezitSkin;
+			}
+			if(skinState==totoroSkin) {
+				skinState=totoroSkin;
 			}
 		}
 		

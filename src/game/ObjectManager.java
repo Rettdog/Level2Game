@@ -16,6 +16,7 @@ public class ObjectManager {
 	Background ground = new Background(0, 100, Ninjoreo.width, Ninjoreo.height);
 	Oreo oreo;
 	int score;
+	int secondScore=0;
 	
 	ObjectManager(Oreo oreo, Background ground) {
 		this.oreo = oreo;
@@ -59,7 +60,12 @@ public class ObjectManager {
 
 				if ((a.x <= oreo.x + oreo.width) && (a.x + a.width >= oreo.x)) {
 					a.collision = true;
-					score++;
+					if(a.type==0) {
+						score++;
+					}else {
+						secondScore++;
+					}
+					
 					speedCounter++;
 					if(speedCounter>10) {
 					allSpeed+=1;
@@ -100,7 +106,8 @@ public class ObjectManager {
 			logTimer = System.currentTimeMillis();
 		}
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
-			addEnemy(new Enemy(new Random().nextInt(Ninjoreo.width - 20), -50, 50, 50));
+			Random rand = new Random();
+			addEnemy(new Enemy(new Random().nextInt(Ninjoreo.width - 20), -50, 50, 50, rand.nextInt(2)));
 			//System.out.println("add");
 			//System.out.println("Enemy speed = "+enemies.get(0).speed);
 			//System.out.println("MaxSpeed = "+oreo.maxSpeed);
@@ -132,6 +139,7 @@ public class ObjectManager {
 		}
 		for (int i = 0; i < enemies.size(); i++) {
 			if (enemies.get(i).y > Ninjoreo.height) {
+				
 				enemies.remove(i);
 			}
 		}

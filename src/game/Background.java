@@ -32,6 +32,9 @@ public class Background extends GameObject {
 		case 2:
 			g.drawImage(GamePanel.kitchenBackgroundImage, x, y, width, 2 * height, null);
 		break;
+		case 3:
+			g.drawImage(GamePanel.treeBackgroundImage, x, y, width, 2 * height, null);
+		break;
 		}
 		
 		// g.fillRect(x, y, width, 2 * height);

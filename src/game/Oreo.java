@@ -63,9 +63,14 @@ public class Oreo extends GameObject {
 		case 2:
 			g.drawImage(GamePanel.ninCheezitNormal, x, y, width, height, null);
 			break;
-		}
 		
+		case 3:
+		g.drawImage(GamePanel.totoroImage, x, y, width, height, null);
+		break;
+		}
 	}
+		
+	
 
 	void jump() {
 		if (doublejump > 0) {

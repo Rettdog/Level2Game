@@ -6,12 +6,14 @@ import java.awt.Graphics;
 public class Enemy extends GameObject {
 	boolean collision;
 	double speed;
+	int type;
 
-	Enemy(int xp, int yp, int widthp, int heightp) {
+	Enemy(int xp, int yp, int widthp, int heightp, int typep) {
 		super(xp, yp, widthp, heightp);
+		type=typep;
 		// TODO Auto-generated constructor stub
 		collision = false;
-speed=3;
+		speed=3;
 	}
 
 	void update() {
@@ -39,6 +41,13 @@ speed=3;
 		break;
 		case 2:
 			g.drawImage(GamePanel.knifeImage, x, y, width, height, null);
+		break;
+		case 3:
+			if(type==0) {
+				g.drawImage(GamePanel.dustSpiritImage, x, y, width, height, null);
+			}else {
+				g.drawImage(GamePanel.acornImage, x, y, width, height, null);
+			}
 		break;
 		}
 		
