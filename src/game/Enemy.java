@@ -7,6 +7,7 @@ public class Enemy extends GameObject {
 	boolean collision;
 	double speed;
 	int type;
+	boolean isAlive;
 
 	Enemy(int xp, int yp, int widthp, int heightp, int typep) {
 		super(xp, yp, widthp, heightp);
@@ -14,6 +15,7 @@ public class Enemy extends GameObject {
 		// TODO Auto-generated constructor stub
 		collision = false;
 		speed=3;
+		isAlive=true;
 	}
 
 	void update() {
@@ -58,5 +60,8 @@ public class Enemy extends GameObject {
 	int getY() {
 		return y;
 
+	}
+	void kill() {
+		isAlive=false;
 	}
 }

@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
@@ -58,12 +59,14 @@ public class ObjectManager {
 
 			if ((a.y <= oreo.y + oreo.height) && (a.y + a.height / 2 >= oreo.y + oreo.height)) {
 
-				if ((a.x <= oreo.x + oreo.width) && (a.x + a.width >= oreo.x)) {
+				if ((a.x <= oreo.x + oreo.width) && (a.x + a.width >= oreo.x)&&a.isAlive) {
 					a.collision = true;
 					if(a.type==0) {
 						score++;
+						a.kill();
 					}else {
 						secondScore++;
+						a.kill();
 					}
 					
 					speedCounter++;
@@ -83,7 +86,22 @@ public class ObjectManager {
 			}
 
 		}
+		
 		return false;
+	}
+	void purgeObjects() {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).y > Ninjoreo.height) {
+				list.remove(i);
+			}
+		}
+		for (int i = 0; i < enemies.size(); i++) {
+			if (enemies.get(i).y > Ninjoreo.height) {
+				
+				enemies.remove(i);
+			}
+		}
+
 	}
 
 	
@@ -107,7 +125,11 @@ public class ObjectManager {
 		}
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
 			Random rand = new Random();
+			if(GamePanel.skinState==GamePanel.totoroSkin) {
 			addEnemy(new Enemy(new Random().nextInt(Ninjoreo.width - 20), -50, 50, 50, rand.nextInt(2)));
+			}else {
+				addEnemy(new Enemy(new Random().nextInt(Ninjoreo.width - 20), -50, 50, 50, 0));
+			}
 			//System.out.println("add");
 			//System.out.println("Enemy speed = "+enemies.get(0).speed);
 			//System.out.println("MaxSpeed = "+oreo.maxSpeed);
@@ -128,23 +150,13 @@ public class ObjectManager {
 			enemies.get(i).draw(g);
 
 		}
+		g.setColor(Color.BLACK);
+		g.drawString((score+secondScore)+"", 470, 10);
+		g.drawString((score+secondScore)+"", 470, 10);
 
 	}
 
-	void purgeObjects() {
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).y > Ninjoreo.height) {
-				list.remove(i);
-			}
-		}
-		for (int i = 0; i < enemies.size(); i++) {
-			if (enemies.get(i).y > Ninjoreo.height) {
-				
-				enemies.remove(i);
-			}
-		}
-
-	}
+	
 
 	public void update() {
 		// TODO Auto-generated method stub

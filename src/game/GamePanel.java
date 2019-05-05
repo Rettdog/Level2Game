@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -23,10 +24,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	final int menuState = 0;
 	final int gameState = 1;
 	final int endState = 2;
-	final int cookieMonster = 0;
-	final int marshMaulerSkin = 1;
-	final int ninCheezitSkin = 2;
-	final int totoroSkin = 3;
+	final static int cookieMonster = 0;
+	final static int marshMaulerSkin = 1;
+	final static int ninCheezitSkin = 2;
+	final static int totoroSkin = 3;
 	public static int skinState;
 	public static BufferedImage ninjoreoBasic;
 	public static BufferedImage rightFacingStick;
@@ -131,11 +132,11 @@ background.draw(g);
 			g.drawString("Ninjoreo", 100, 200);
 		break;
 		case 1:
-			g.drawString("Marsh", 100, 180);
-			g.drawString("Mauler", 100, 250);
+			g.drawString("Marsh", 130, 170);
+			g.drawString("Mauler", 120, 250);
 		break;
 		case 2:
-			g.drawString("NinCheezit", 60, 200);
+			g.drawString("NinCheezit", 55, 200);
 		break;
 		case 3:
 			g.setColor(Color.CYAN);
@@ -173,59 +174,123 @@ background.draw(g);
 		// g.fillRect(0, 0, Ninjoreo.width, Ninjoreo.height);
 		ninjoreo.draw(g);
 		manager.draw(g);
+		
+		
 	}
 
 	void drawEndState(Graphics g) {
 		g.setColor(Color.RED);
 		background.speed = 1;
 		background.draw(g);
-		g.setColor(Color.BLACK);
-		g.setFont(titleFont);
-		g.drawString("Game Over", 53, 203);
-		g.setColor(Color.RED);
-		g.setFont(titleFont);
-		g.drawString("Game Over", 50, 200);
+		Random rand = new Random();
+		if(manager.score+manager.secondScore==0) {
+			g.setColor(Color.BLACK);
+			g.setFont(titleFont);
+			g.drawString("Nice Try", 103, 203);
+			g.setColor(Color.RED);
+			g.setFont(titleFont);
+			g.drawString("Nice Try", 100, 200);
+		}else if(manager.score+manager.secondScore<3) {
+			g.setColor(Color.BLACK);
+			g.setFont(titleFont);
+			g.drawString("Keep it Up", 66, 203);
+			g.setColor(Color.RED);
+			g.setFont(titleFont);
+			g.drawString("Keep it Up", 63, 200);
+		}else if(manager.score+manager.secondScore<8) {
+			g.setColor(Color.BLACK);
+			g.setFont(titleFont);
+			g.drawString("Nice Job!", 83, 203);
+			g.setColor(Color.RED);
+			g.setFont(titleFont);
+			g.drawString("Nice Job!", 80, 200);
+		}else if(manager.score+manager.secondScore<12) {
+			g.setColor(Color.BLACK);
+			g.setFont(titleFont);
+			g.drawString("Insane!", 127, 203);
+			g.setColor(Color.RED);
+			g.setFont(titleFont);
+			g.drawString("Insane!", 123, 200);
+		}else if(manager.score+manager.secondScore>11) {
+			switch(skinState) {
+			case 0:
+				g.setColor(Color.BLACK);
+				g.setFont(titleFont);
+				g.drawString("Ninja Master!", 20, 203);
+				g.setColor(Color.RED);
+				g.setFont(titleFont);
+				g.drawString("Ninja Master!", 17, 200);
+			break;
+			case 1:
+				g.setColor(Color.BLACK);
+				g.setFont(titleFont);
+				g.drawString("Mauler Master!", 53, 203);
+				g.setColor(Color.RED);
+				g.setFont(titleFont);
+				g.drawString("Mauler Master!", 50, 200);
+				break;
+			case 2:
+				g.setColor(Color.BLACK);
+				g.setFont(titleFont);
+				g.drawString("Cheese Master!", 53, 203);
+				g.setColor(Color.RED);
+				g.setFont(titleFont);
+				g.drawString("Cheese Master!", 50, 200);
+				break;
+			case 3:
+				g.setColor(Color.BLACK);
+				g.setFont(titleFont);
+				g.drawString("ToToRo Master!", 53, 203);
+				g.setColor(Color.RED);
+				g.setFont(titleFont);
+				g.drawString("ToToRo Master!", 50, 200);
+				break;
+			}
+			
+		}
 		
+		
+	
 		switch (skinState) {
 		case 0:
 			g.setColor(Color.BLACK);
 			g.setFont(nontitle);
-			g.drawString("You totally wrecked " + manager.score / 2, 122, 302);
+			g.drawString("You totally wrecked " + manager.score, 118, 302);
 			g.setColor(Color.RED);
-			g.drawString("You totally wrecked " + manager.score / 2, 120, 300);
+			g.drawString("You totally wrecked " + manager.score, 116, 300);
 			g.setColor(Color.BLACK);
-			g.drawString("cookie monsters", 162, 352);
+			g.drawString("cookie monsters", 152, 352);
 			g.setColor(Color.RED);
-			g.drawString("cookie monsters", 160, 350);
+			g.drawString("cookie monsters", 150, 350);
 		break;
 		case 1:
 			g.setColor(Color.BLACK);
 			g.setFont(nontitle);
-			g.drawString("You absorbed " + manager.score / 2, 122, 302);
+			g.drawString("You absorbed " + manager.score, 136, 302);
 			g.setColor(Color.RED);
-			g.drawString("You absorbed " + manager.score / 2, 120, 300);
+			g.drawString("You absorbed " + manager.score, 134, 300);
 			g.setColor(Color.BLACK);
-			g.drawString("fireballs", 162, 352);
+			g.drawString("fireballs", 186, 352);
 			g.setColor(Color.RED);
-			g.drawString("fireballs", 160, 350);
+			g.drawString("fireballs", 184, 350);
 		break;
 		case 2:
 			g.setColor(Color.BLACK);
 			g.setFont(nontitle);
-			g.drawString("You destroyed " + manager.score / 2, 122, 302);
+			g.drawString("You destroyed " + manager.score, 132, 302);
 			g.setColor(Color.RED);
-			g.drawString("You destroyed " + manager.score / 2, 120, 300);
+			g.drawString("You destroyed " + manager.score, 130, 300);
 			g.setColor(Color.BLACK);
-			g.drawString("knives", 194, 352);
+			g.drawString("knives", 202, 352);
 			g.setColor(Color.RED);
-			g.drawString("knives", 192, 350);
+			g.drawString("knives", 200, 350);
 		break;
 		case 3:
 			g.setColor(Color.BLACK);
 			g.setFont(nontitle);
-			g.drawString("You scattered " + manager.score / 2, 142, 302);
+			g.drawString("You scattered " + manager.score, 142, 302);
 			g.setColor(Color.GRAY);
-			g.drawString("You scattered " + manager.score / 2, 140, 300);
+			g.drawString("You scattered " + manager.score, 140, 300);
 			g.setColor(Color.BLACK);
 			g.drawString("dust spirits", 174, 352);
 			g.setColor(Color.GRAY);
@@ -236,9 +301,9 @@ background.draw(g);
 			g.drawString("and", 218, 390);
 			g.setColor(Color.BLACK);
 			g.setFont(nontitle);
-			g.drawString("collected " + manager.secondScore / 2, 172, 442);
+			g.drawString("collected " + manager.secondScore, 172, 442);
 			g.setColor(Color.ORANGE);
-			g.drawString("collected " + manager.secondScore / 2, 170, 440);
+			g.drawString("collected " + manager.secondScore, 170, 440);
 			g.setColor(Color.BLACK);
 			g.drawString("acorns", 200, 494);
 			g.setColor(Color.ORANGE);
@@ -326,7 +391,7 @@ background.draw(g);
 							"Use the side arrows to move side to side and the up arrow to jump.\nJump on the cookie monsters "
 									+ "to make them fall but \nmake sure not to hit them from below"
 									+ ".\nDon't fall too fast, or you will fall through \nthe logs and into the abyss"
-									+ "\nYou can test out the controls on this screen but \\nin the real game you only have 1 double jump.");
+									+ "\nYou can test out the controls on this screen but \nin the real game you only have 1 double jump.");
 				break;
 				case 1:
 					JOptionPane.showMessageDialog(null,
@@ -340,14 +405,14 @@ background.draw(g);
 							"Use the side arrows to move side to side and the up arrow to jump.\nJump on the knifes "
 									+ "to make them fall but \nmake sure not to hit them from below or you will cut into crumbs"
 									+ ".\nDon't fall too fast, or you will fall through \nthe plates and onto the floor below"
-									+ "\nYou can test out the controls on this screen but \\nin the real game you only have 1 double jump.");
+									+ "\nYou can test out the controls on this screen but \nin the real game you only have 1 double jump.");
 				break;
 				case 3:
 					JOptionPane.showMessageDialog(null,
 							"Use the side arrows to move side to side and the up arrow to jump.\nJump on the dust spirits "
 									+ "to make them fall but \nmake sure not to hit them from below or you will fall instead"
 									+ ".\nCollecting acorns will give you special points.\nDon't fall too fast, or you will fall through \nthe logs and into the abyss below"
-									+ "\nYou can test out the controls on this screen but \\nin the real game you only have 1 double jump.");
+									+ "\nYou can test out the controls on this screen but \nin the real game you only have 1 double jump.");
 				break;
 				}
 				
@@ -376,7 +441,7 @@ background.draw(g);
 			}
 
 		}
-		if (e.getKeyCode() == 38) {
+		if (e.getKeyCode() == 38||e.getKeyCode()==32) {
 			ninjoreo.jump();
 
 		}
