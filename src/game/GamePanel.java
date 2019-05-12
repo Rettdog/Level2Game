@@ -1,5 +1,6 @@
 package game;
 
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -53,6 +55,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Timer timer;
 	GameObject object;
 	ThemeButton button;
+	MusicPlayer musicPlayer;
 	Font titleFont;
 	Font nontitle;
 	Font subtitleFont;
@@ -64,6 +67,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	GamePanel() {
 		timer = new Timer(1000 / 60, this);
 		button = new ThemeButton(325,650,100,100);
+		musicPlayer=new MusicPlayer();
 		//button.addActionListener(this);
 		//skinState = cookieMonster;
 		skinState = cookieMonster;
@@ -110,6 +114,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		manager.update();
 		manager.manageEnemies();
 		manager.lose();
+		musicPlayer.playMusic(skinState, gameState);
 
 	}
 
@@ -224,26 +229,38 @@ background.draw(g);
 			case 1:
 				g.setColor(Color.BLACK);
 				g.setFont(titleFont);
-				g.drawString("Mauler Master!", 53, 203);
+				g.drawString("MarshMaster!", 13, 203);
 				g.setColor(Color.RED);
 				g.setFont(titleFont);
-				g.drawString("Mauler Master!", 50, 200);
+				g.drawString("MarshMaster!", 10, 200);
 				break;
 			case 2:
 				g.setColor(Color.BLACK);
 				g.setFont(titleFont);
-				g.drawString("Cheese Master!", 53, 203);
+				g.drawString("Cheese", 103, 173);
 				g.setColor(Color.RED);
 				g.setFont(titleFont);
-				g.drawString("Cheese Master!", 50, 200);
+				g.drawString("Cheese", 100, 170);
+				g.setColor(Color.BLACK);
+				g.setFont(titleFont);
+				g.drawString("Master!", 103, 253);
+				g.setColor(Color.RED);
+				g.setFont(titleFont);
+				g.drawString("Master!", 100, 250);
 				break;
 			case 3:
 				g.setColor(Color.BLACK);
 				g.setFont(titleFont);
-				g.drawString("ToToRo Master!", 53, 203);
+				g.drawString("ToToRo", 103, 173);
 				g.setColor(Color.RED);
 				g.setFont(titleFont);
-				g.drawString("ToToRo Master!", 50, 200);
+				g.drawString("ToToRo", 100, 170);
+				g.setColor(Color.BLACK);
+				g.setFont(titleFont);
+				g.drawString("Master!", 108, 253);
+				g.setColor(Color.RED);
+				g.setFont(titleFont);
+				g.drawString("Master!", 105, 250);
 				break;
 			}
 			
@@ -517,5 +534,6 @@ background.draw(g);
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }
