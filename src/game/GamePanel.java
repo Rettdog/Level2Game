@@ -51,7 +51,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	public static BufferedImage totoroImage;
 	public static BufferedImage dustSpiritImage;
 	public static BufferedImage acornImage;
-	int currentState = menuState;
+	public int currentState = menuState;
 	Timer timer;
 	GameObject object;
 	ThemeButton button;
@@ -61,13 +61,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	Font subtitleFont;
 	Oreo ninjoreo = new Oreo(200, 650, 50, 50);
 	Background background = new Background(0, -1 * Ninjoreo.height, Ninjoreo.width, Ninjoreo.height);
-	ObjectManager manager = new ObjectManager(ninjoreo, background);
+	ObjectManager manager;
 	boolean jumping = false;
 
 	GamePanel() {
+		musicPlayer=new MusicPlayer();
+		musicPlayer.playTitleSong();
 		timer = new Timer(1000 / 60, this);
 		button = new ThemeButton(325,650,100,100);
-		musicPlayer=new MusicPlayer();
+		
+		manager = new ObjectManager(ninjoreo, background, musicPlayer);
 		//button.addActionListener(this);
 		//skinState = cookieMonster;
 		skinState = cookieMonster;
@@ -114,7 +117,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		manager.update();
 		manager.manageEnemies();
 		manager.lose();
-		musicPlayer.playMusic(skinState, gameState);
+		
 
 	}
 
@@ -444,6 +447,8 @@ background.draw(g);
 			}
 
 			currentState++;
+			musicPlayer.stopSound();
+			musicPlayer.playMusic(currentState);
 
 			if (currentState > endState) {
 
@@ -454,7 +459,7 @@ background.draw(g);
 			if (currentState == menuState) {
 				background = new Background(0, -1 * Ninjoreo.height, Ninjoreo.width, Ninjoreo.height);
 				ninjoreo = new Oreo(200, 650, 50, 50);
-				manager = new ObjectManager(ninjoreo, background);
+				manager = new ObjectManager(ninjoreo, background, musicPlayer);
 			}
 
 		}

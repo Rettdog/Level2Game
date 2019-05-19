@@ -18,14 +18,17 @@ public class ObjectManager {
 	Oreo oreo;
 	int score;
 	int secondScore=0;
+	MusicPlayer music;
 	
-	ObjectManager(Oreo oreo, Background ground) {
+	ObjectManager(Oreo oreo, Background ground, MusicPlayer musicPlayer) {
 		this.oreo = oreo;
 		this.ground = ground;
+		music= musicPlayer;
 		//speedIncreaseRate=2/10;
 		
 	}
 
+	
 	public boolean checkCollision() {
 		for (Platform a : list) {
 
@@ -73,11 +76,16 @@ public class ObjectManager {
 					if(speedCounter>10) {
 					allSpeed+=1;
 					System.out.println("Speed increased to "+allSpeed);
-					System.out.println("Platform speed = "+(list.get(1).speed+1));
-					System.out.println("Enemy speed = "+(enemies.get(0).speed+1));
-					System.out.println("MaxSpeed = "+(oreo.maxSpeed+.1));
-					System.out.println("Background Speed = "+(ground.speed+1));
-					System.out.println(" ");
+					//System.out.println("Platform speed = "+(list.get(1).speed+1));
+					//System.out.println("Enemy speed = "+(enemies.get(0).speed+1));
+					//System.out.println("MaxSpeed = "+(oreo.maxSpeed+.1));
+					//System.out.println("Background Speed = "+(ground.speed+1));
+					//System.out.println(" ");
+					music.stopSound();
+					if(music.musicSpeed<2) {
+					music.musicSpeed++;
+					}
+					music.playMusic(1);
 					speedCounter=0;
 					}
 					return true;

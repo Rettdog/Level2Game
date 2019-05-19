@@ -11,10 +11,10 @@ public class ThemeButton extends GameObject{
 	}
 	
 	boolean checkClicked(int x, int y) {
-		System.out.println("x = "+x);
-		System.out.println("y = "+y);
-		System.out.println("X range = "+this.x+" to "+(this.x+width));
-		System.out.println("Y range = "+this.y+" to "+(this.y+height));
+		//System.out.println("x = "+x);
+		//System.out.println("y = "+y);
+		//System.out.println("X range = "+this.x+" to "+(this.x+width));
+		//System.out.println("Y range = "+this.y+" to "+(this.y+height));
 		if(this.x <= x && x<= this.x+width) {
 			if(this.y <= y && y<= this.y+height) {
 				return true;
