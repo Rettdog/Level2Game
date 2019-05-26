@@ -192,6 +192,7 @@ public class ObjectManager {
 	public void lose() {
 		if (Ninjoreo.height <= oreo.y + oreo.height) {
 			System.out.println("lose");
+			music.musicSpeed=0;
 			oreo.lose = true;
 		}
 	}

@@ -108,6 +108,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	void updateMenuState() {
 		// currentState = menuState;
 		ninjoreo.update();
+		musicPlayer.playMusic(currentState);
 
 	}
 
@@ -117,6 +118,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		manager.update();
 		manager.manageEnemies();
 		manager.lose();
+		musicPlayer.playMusic(currentState);
 		
 
 	}
@@ -124,6 +126,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	void updateEndState() {
 		// currentState = endState;
 		background.update();
+		musicPlayer.playMusic(currentState);
 	}
 
 	void drawMenuState(Graphics g) {
@@ -198,28 +201,28 @@ background.draw(g);
 			g.setColor(Color.RED);
 			g.setFont(titleFont);
 			g.drawString("Nice Try", 100, 200);
-		}else if(manager.score+manager.secondScore<3) {
+		}else if(manager.score+manager.secondScore<8) {
 			g.setColor(Color.BLACK);
 			g.setFont(titleFont);
 			g.drawString("Keep it Up", 66, 203);
 			g.setColor(Color.RED);
 			g.setFont(titleFont);
 			g.drawString("Keep it Up", 63, 200);
-		}else if(manager.score+manager.secondScore<8) {
+		}else if(manager.score+manager.secondScore<18) {
 			g.setColor(Color.BLACK);
 			g.setFont(titleFont);
 			g.drawString("Nice Job!", 83, 203);
 			g.setColor(Color.RED);
 			g.setFont(titleFont);
 			g.drawString("Nice Job!", 80, 200);
-		}else if(manager.score+manager.secondScore<12) {
+		}else if(manager.score+manager.secondScore<40) {
 			g.setColor(Color.BLACK);
 			g.setFont(titleFont);
 			g.drawString("Insane!", 127, 203);
 			g.setColor(Color.RED);
 			g.setFont(titleFont);
 			g.drawString("Insane!", 123, 200);
-		}else if(manager.score+manager.secondScore>11) {
+		}else if(manager.score+manager.secondScore>39) {
 			switch(skinState) {
 			case 0:
 				g.setColor(Color.BLACK);
@@ -352,6 +355,8 @@ background.draw(g);
 		if (ninjoreo.lose) {
 			ninjoreo.lose = false;
 			currentState = endState;
+			musicPlayer.stopSound();
+			//musicPlayer.playMusic(currentState);
 		}
 		if (currentState == menuState) { 
 			updateMenuState();
@@ -447,8 +452,10 @@ background.draw(g);
 			}
 
 			currentState++;
+			if(!(currentState==1)) {
 			musicPlayer.stopSound();
-			musicPlayer.playMusic(currentState);
+			}
+			//musicPlayer.playMusic(currentState);
 
 			if (currentState > endState) {
 
@@ -460,6 +467,7 @@ background.draw(g);
 				background = new Background(0, -1 * Ninjoreo.height, Ninjoreo.width, Ninjoreo.height);
 				ninjoreo = new Oreo(200, 650, 50, 50);
 				manager = new ObjectManager(ninjoreo, background, musicPlayer);
+				musicPlayer.playMusic(currentState);
 			}
 
 		}
@@ -511,6 +519,8 @@ background.draw(g);
 			if(skinState==totoroSkin) {
 				skinState=totoroSkin;
 			}
+			musicPlayer.stopSound();
+			//musicPlayer.playMusic(currentState);
 		}
 		
 		

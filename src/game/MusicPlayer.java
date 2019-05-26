@@ -10,53 +10,55 @@ public class MusicPlayer {
 	boolean playing;
 	AudioClip sound;
 	public int musicSpeed;
-
+	boolean titlePlayed = false;
 
 	MusicPlayer() {
 		playing = false;
-		
+
 		musicSpeed = 0;
 	}
+
 	public void playTitleSong() {
-		//playSound("testsong.wav");
-		playSound("gameTitleNormal.mp3");
-		
+		// playSound("testsong.wav");
+		if (!titlePlayed) {
+			playSound("gameTitleNormal.wav");
+		}
 	}
 
 	public void playMusic(int state) {
 		int skin = GamePanel.skinState;
-		 
+
 		if (playing == false) {
 
 			switch (skin) {
 			case 0:
 				switch (state) {
 				case 0:
-					System.out.println("playing test song");
-					playSound("testsong.wav");
+					System.out.println("playing ninjoreo normal");
+					playSound("ninjoreoNormal.wav");
 
 					break;
 				case 1:
 					// gameState
 					switch (musicSpeed) {
 					case 0:
-						System.out.println("playing test song");
-						playSound("testsong.wav");
+						System.out.println("playing ninjoreo normal");
+						playSound("ninjoreoNormal.wav");
 						break;
 					case 1:
-						System.out.println("playing test song");
-						playSound("testsong.wav");
+						System.out.println("playing nijoreo fast");
+						playSound("ninjoreoFast.wav");
 						break;
 					case 2:
-						System.out.println("playing test song");
-						playSound("testsong.wav");
+						System.out.println("playing ninjoreo fastest");
+						playSound("ninjoreoFastest.wav");
 						break;
 					}
 
 					break;
 				case 2:
-					System.out.println("playing test song");
-					playSound("testsong.wav");
+					System.out.println("playing ninjoreo gameover");
+					playSound("ninjoreoGameOver.wav");
 
 					break;
 				}
@@ -64,31 +66,31 @@ public class MusicPlayer {
 			case 1:
 				switch (state) {
 				case 0:
-					System.out.println("playing test song");
-					playSound("testsong.wav");
+					System.out.println("playing marshMauler normal");
+					playSound("marshMaulerNormal.wav");
 
 					break;
 				case 1:
 					// gameState
 					switch (musicSpeed) {
 					case 0:
-						System.out.println("playing test song");
-						playSound("testsong.wav");
+						System.out.println("playing marshMauler normal");
+						playSound("marshMaulerNormal.wav");
 						break;
 					case 1:
-						System.out.println("playing test song");
-						playSound("testsong.wav");
+						System.out.println("playing marshMauler fast");
+						playSound("marshMaulerFast.wav");
 						break;
 					case 2:
-						System.out.println("playing test song");
-						playSound("testsong.wav");
+						System.out.println("playing marshMauler fastest");
+						playSound("marshMaulerFastest.wav");
 						break;
 					}
 
 					break;
 				case 2:
-					System.out.println("playing test song");
-					playSound("testsong.wav");
+					System.out.println("playing marshMauler gameover");
+					playSound("marshMaulerGameOver.wav");
 
 					break;
 				}
@@ -96,31 +98,31 @@ public class MusicPlayer {
 			case 2:
 				switch (state) {
 				case 0:
-					System.out.println("playing test song");
-					playSound("testsong.wav");
+					System.out.println("playing nincheezit normal");
+					playSound("nincheezitNormal.wav");
 
 					break;
 				case 1:
 					// gameState
 					switch (musicSpeed) {
 					case 0:
-						System.out.println("playing test song");
-						playSound("testsong.wav");
+						System.out.println("playing nincheezit normal");
+						playSound("nincheezitNormal.wav");
 						break;
 					case 1:
-						System.out.println("playing test song");
-						playSound("testsong.wav");
+						System.out.println("playing nincheezit fast");
+						playSound("nincheezitFast.wav");
 						break;
 					case 2:
-						System.out.println("playing test song");
-						playSound("testsong.wav");
+						System.out.println("playing nincheezit fastest");
+						playSound("nincheezitFastest.wav");
 						break;
 					}
 
 					break;
 				case 2:
-					System.out.println("playing test song");
-					playSound("testsong.wav");
+					System.out.println("playing marshMauler gameover");
+					playSound("nincheezitGameOver.wav");
 
 					break;
 				}
@@ -128,31 +130,31 @@ public class MusicPlayer {
 			case 3:
 				switch (state) {
 				case 0:
-					System.out.println("playing test song");
-					playSound("testsong.wav");
+					System.out.println("playing totoro normal");
+					playSound("totoroNormal.wav");
 
 					break;
 				case 1:
 					// gameState
 					switch (musicSpeed) {
 					case 0:
-						System.out.println("playing test song");
-						playSound("testsong.wav");
+						System.out.println("playing totoro normal");
+						playSound("totoroNormal.wav");
 						break;
 					case 1:
-						System.out.println("playing test song");
-						playSound("testsong.wav");
+						System.out.println("playing totoro fast");
+						playSound("totoroFast.wav");
 						break;
 					case 2:
-						System.out.println("playing test song");
-						playSound("testsong.wav");
+						System.out.println("playing totoro fastest");
+						playSound("totoroFastest.wav");
 						break;
 					}
 
 					break;
 				case 2:
-					System.out.println("playing test song");
-					playSound("testsong.wav");
+					System.out.println("playing totoro gameover");
+					dontLoop("totoroGameOver.wav");
 
 					break;
 				}
@@ -168,8 +170,15 @@ public class MusicPlayer {
 		sound.loop();
 		playing = true;
 	}
+	private void dontLoop(String fileName) {
+		sound = JApplet.newAudioClip(getClass().getResource(fileName));
+
+		sound.play();
+		playing = true;
+	}
+
 	private void playMP3() {
-		
+
 	}
 
 	public void stopSound() {
