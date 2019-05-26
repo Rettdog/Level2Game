@@ -84,8 +84,9 @@ public class ObjectManager {
 					music.stopSound();
 					if(music.musicSpeed<2) {
 					music.musicSpeed++;
-					}
 					music.playMusic(1);
+					}
+					
 					speedCounter=0;
 					}
 					return true;

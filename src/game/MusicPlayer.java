@@ -1,9 +1,6 @@
 package game;
 
 import java.applet.AudioClip;
-import java.io.File;
-
-import javax.print.attribute.standard.Media;
 import javax.swing.JApplet;
 
 public class MusicPlayer {
@@ -177,9 +174,7 @@ public class MusicPlayer {
 		playing = true;
 	}
 
-	private void playMP3() {
-
-	}
+	
 
 	public void stopSound() {
 		sound.stop();

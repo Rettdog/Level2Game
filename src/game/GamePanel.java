@@ -1,6 +1,6 @@
 package game;
 
-import java.applet.AudioClip;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -12,17 +12,17 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Random;
-
 import javax.imageio.ImageIO;
-import javax.swing.JApplet;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3836420182257476013L;
 	final int menuState = 0;
 	final int gameState = 1;
 	final int endState = 2;
@@ -96,8 +96,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			ninCheezitTongue = ImageIO.read(this.getClass().getResourceAsStream("NinCheezit/NinCheezitTongue.png"));
 			plateImage = ImageIO.read(this.getClass().getResourceAsStream("Plate.png"));
 			kitchenBackgroundImage = ImageIO.read(this.getClass().getResourceAsStream("Kitchen.png"));
-			totoroImage =ImageIO.read(this.getClass().getResourceAsStream("totoro.png"));
-			dustSpiritImage = ImageIO.read(this.getClass().getResourceAsStream("dustSpirit.png"));
+			totoroImage =ImageIO.read(this.getClass().getResourceAsStream("Totoro.png"));
+			dustSpiritImage = ImageIO.read(this.getClass().getResourceAsStream("DustSpirit.png"));
 			acornImage= ImageIO.read(this.getClass().getResourceAsStream("Acorn.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -193,7 +193,6 @@ background.draw(g);
 		g.setColor(Color.RED);
 		background.speed = 1;
 		background.draw(g);
-		Random rand = new Random();
 		if(manager.score+manager.secondScore==0) {
 			g.setColor(Color.BLACK);
 			g.setFont(titleFont);

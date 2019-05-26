@@ -1,6 +1,6 @@
 package game;
 
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Graphics;
 
 public class Enemy extends GameObject {
